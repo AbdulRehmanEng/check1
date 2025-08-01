@@ -1,0 +1,50 @@
+<div class="login-container">
+    <h2>Login</h2>
+  
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="userName">Username</label>
+        <input
+          id="userName"
+          type="text"
+          class="form-control"
+          formControlName="userName"
+          placeholder="Enter your username"
+        />
+        <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched" class="error">
+          Username is required.
+        </div>
+      </div>
+  
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        <div
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          class="error"
+        >
+          Password is required and must be at least 5 characters.
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Logging in...' : 'Login' }}
+        </button>
+      </div>
+    </form>
+  </div>
